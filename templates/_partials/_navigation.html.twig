@@ -1,0 +1,90 @@
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="{{ path('app_home') }}">Hospitalité</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+            {% if app.user %}
+                <ul class="navbar-nav">
+                    {% if is_granted('ROLE_USER') %}
+                        <li class="nav-item">
+                            {# <a class="nav-link" aria-current="page" href="{{ path('pers.index') }}">Personnes</a> #}
+                            <a class="nav-link" aria-current="page" href="#">Personnes</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                Listes
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                {# <li><a class="dropdown-item" href="{{ path('liste.deces') }}">Décès</a></li> #}
+                                <li><a class="dropdown-item" href="#">Décès</a></li>
+                                {# <li><a class="dropdown-item" href="{{ path('liste.peles') }}">Pèlerinages</a></li> #}
+                                <li><a class="dropdown-item" href="#">Pèlerinages</a></li>
+                                {# <li><a class="dropdown-item" href="{{ path('liste.engages') }}">Engagés</a></li> #}
+                                <li><a class="dropdown-item" href="#">Engagés</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                Pèlerinage
+                            </a>
+                            <ul class="dropdown-menu">
+                                {# <li><a class="dropdown-item" href="{{ path('insc.index') }}">Inscrits</a></li> #}
+                                <li><a class="dropdown-item" href="#">Inscrits</a></li>
+                                {# <li><a class="dropdown-item" href="{{ path('insc.hosp_list') }}">Hospitaliers</a></li> #}
+                                <li><a class="dropdown-item" href="#">Hospitaliers</a></li>
+                                {# <li><a class="dropdown-item" href="{{ path('insc.pmal_list') }}">Pers malades</a></li> #}
+                                <li><a class="dropdown-item" href="#">Pers malades</a></li>
+                                {# <li><a class="dropdown-item" href="{{ path('insc.lyce_list') }}">Grp Lycéens</a></li> #}
+                                <li><a class="dropdown-item" href="#">Grp Lycéens</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Graphiques</a></li>
+                                {# <li><a class="dropdown-item" href="{{ path('graph.insc') }}">Graphiques</a></li> #}
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    {# <li><a class="dropdown-item" href="{{ path('export.index') }}">Exports</a></li> #}
+                                    <li><a class="dropdown-item" href="#">Exports</a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        {# <a class="nav-item nav-link" href="{{ path('admin') }}">Administration</a> #}
+                        <a class="nav-item nav-link" href="#">Administration</a>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ ux_icon('ph:user', {height: '20px', width: '20px'}) }} {{ app.user.fullname }}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_logout') }}">
+                                    {{ ux_icon('ph:sign-out', {height: '20px', width: '20px'}) }} Se déconnecter
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    {{ ux_icon('ph:identification-card', {height: '20px', width: '20px'}) }} Mon compte
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    {{ ux_icon('ph:password', {height: '20px', width: '20px'}) }} Mot de passe
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            {% else %}
+                <ul class="navbar-nav ms-auto">
+                    <a class="nav-item nav-link " href="{{ path('app_login') }}">
+                        {{ ux_icon('ph:sign-in', {height: '20px', width: '20px'}) }} Se connecter
+                    </a>
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</nav>
